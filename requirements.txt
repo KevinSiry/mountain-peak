@@ -1,0 +1,9 @@
+djangorestframework>=*
+django-cors-headers>=*
+djangorestframework-camel-case>=*
+djangorestframework-simplejwt>=*
+xlwt>=*
+django-secure>=*
+django-sslserver>=*
+requests>=*
+psycopg2>=*

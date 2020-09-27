@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mountain Peak</title>
+</head>
+<body>
+<h1>Add peak:</h1>
+<form action="{% url 'add-peak' %}" method="POST">
+    {% csrf_token %}
+    <label for="name">Mountain Name: </label>
+    <input id="name" type="text" name="name">
+    <br>
+    <label for="altitude">Mountain Altitude: </label>
+    <input id="altitude" type="text" name="altitude">
+    <br>
+    <label for="latitude">Mountain Latitude: </label>
+    <input id="latitude" type="text" name="latitude">
+    <br>
+    <label for="longitude">Mountain Longitude: </label>
+    <input id="longitude" type="text" name="longitude">
+    <br>
+    <input type="submit" value="OK"/>
+</form>
+<br>
+<h1>Retrieve peaks:</h1>
+<form action = "mountain-peaks" method = "get">
+    <label for="sw_long">SouthWest Longitude: </label>
+    <input id="sw_long" type="text" name="sw_long">
+    <br>
+    <label for="sw_lat">SouthWest Latitude: </label>
+    <input id="sw_lat" type="text" name="sw_lat">
+    <br>
+    <label for="ne_long">NorthEst Longitude: </label>
+    <input id="ne_long" type="text" name="ne_long">
+    <br>
+    <label for="ne_lat">NorthEst Latitude: </label>
+    <input id="ne_lat" type="text" name="ne_lat">
+    <br>
+    <input type="submit" value="OK">
+</form>
+
+{% block peaks %}
+<h1>Peaks list:</h1>
+    {% for peak in peaks %}
+    <h2>{{ peak.name }}</h2>
+    <ul>
+        <li>Altitude: {{ peak.altitude }}</li>
+        <li>Longitude: {{ peak.longitude }}</li>
+        <li>Latitude: {{ peak.latitude }}</li>
+    </ul>
+    <form action="{% url 'peak' peak.id %}" method="POST">
+        {% csrf_token %}
+        <input name="delete" type="submit" value="Delete"/>
+    </form>
+    {% endfor %}
+{% endblock %}
+</body>
+</html>
