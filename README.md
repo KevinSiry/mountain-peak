@@ -15,3 +15,6 @@ REST API to manage peaks with different features:
 * Update a peak
 * Get a peak
 * Get peaks in a given geographical bounding box
+
+## Swagger
+https://app.swaggerhub.com/apis/KevinSiry132/moutainpeak/1.0.0

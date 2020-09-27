@@ -16,12 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from service.views import create_peak_view, single_peak_view, get_peaks_view, \
-    index_view
+from service.views import create_peak_view, single_peak_view, get_peaks_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index_view.home, name='home'),
     path('mountain-peak', create_peak_view.CreatePeakView.as_view(),
          name='add-peak'),
     path('mountain-peak/<int:peak_id>',
