@@ -1,7 +1,19 @@
 # mountain-peak
 
 ## Launch the project
-After pulling the project, execute the docker-compose file
+After pulling the project, it's better to create a virtual env to install all the dependencies.
+
+```
+virtualenv venv
+```
+
+Then install the dependencies.
+
+```
+pip install -r .\requirements.txt
+```
+
+Finally you can launch the docker-compose file to start the project.
 
 ```
 docker-compose up
