@@ -5,6 +5,7 @@ After pulling the project, it's better to create a virtual env to install all th
 
 ```
 virtualenv venv
+.\venv\Scripts\activate
 ```
 
 Then install the dependencies.
