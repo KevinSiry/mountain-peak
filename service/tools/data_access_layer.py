@@ -1,5 +1,7 @@
+from common.exceptions import NotFoundException, InvalidParametersException
 from service.models import Mountain
 from service.tools.serializers.peak_serializer import PeakSerializer
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class DataAccessLayer:
@@ -10,7 +12,7 @@ class DataAccessLayer:
             instance = serializer.save()
             return PeakSerializer(instance).data
         else:
-            raise Exception(serializer.errors)
+            raise InvalidParametersException(serializer.errors)
 
     def create_peak(self, peak):
         serializer = PeakSerializer(data=peak)
@@ -18,8 +20,11 @@ class DataAccessLayer:
 
     @staticmethod
     def get_peak(peak_id):
-        peak = Mountain.objects.get(id=peak_id)
-        return PeakSerializer(instance=peak).data
+        try:
+            peak = Mountain.objects.get(id=peak_id)
+            return PeakSerializer(instance=peak).data
+        except ObjectDoesNotExist as error:
+            raise NotFoundException(str(error))
 
     def update_peak(self, data, peak_id):
         instance = Mountain.objects.get(id=peak_id)
@@ -28,7 +33,10 @@ class DataAccessLayer:
 
     @staticmethod
     def delete_peak(peak_id):
-        Mountain.objects.get(id=peak_id).delete()
+        try:
+            Mountain.objects.get(id=peak_id).delete()
+        except ObjectDoesNotExist as error:
+            raise NotFoundException(str(error))
 
     @staticmethod
     def get_peaks(sw_long, sw_lat, ne_long, ne_lat):
